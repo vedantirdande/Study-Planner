@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard | Study Planner</title>
+    
+    <link rel="stylesheet"
+        href="{{ url_for('static', filename='css/responsive.css') }}">
+
+    <link rel="stylesheet"
+        href="{{ url_for('static', filename='css/dashboard.css') }}">
+
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+
+<nav class="navbar">
+
+    <div class="logo">
+        📚 Study Planner
+    </div>
+
+    <div class="nav-links">
+
+        <a href="/dashboard">Home</a>
+
+        <a href="/notes">Notes</a>
+
+        <a href="/pyq">PYQs</a>
+
+        <a href="/upload">Upload</a>
+
+        <a href="/profile">Profile</a>
+
+        <a href="/logout" class="logout-btn">Logout</a>
+
+    </div>
+
+</nav>
+
+<div class="container">
+
+    <!-- Welcome Section -->
+
+    <h1>Welcome, {{ name }} 👋</h1>
+
+    <p class="subtitle">
+        Manage your study resources from one place.
+    </p>
+
+    <!-- ================= QUICK STATS ================= -->
+
+<div class="stats">
+
+<div class="stat-card">
+
+    <h2>📚</h2>
+
+    <h3>{{ total_notes }}</h3>
+
+    <p>Total Notes</p>
+
+</div>
+
+<div class="stat-card">
+
+    <h2>📄</h2>
+
+    <h3>{{ total_pyqs }}</h3>
+
+    <p>Total PYQs</p>
+
+</div>
+
+    <div class="stat-card">
+
+        <h2>👤</h2>
+
+        <h3>{{ name }}</h3>
+
+        <p>Logged In User</p>
+
+    </div>
+
+</div>
+
+
+    <!-- Dashboard Cards -->
+
+    <div class="cards">
+
+        <a href="/upload" class="card">
+
+            <h2>📤 Upload Resource</h2>
+
+            <p>Upload Notes and PYQs</p>
+
+        </a>
+
+        <a href="/notes" class="card">
+
+            <h2>📚 Notes</h2>
+
+            <p>View Study Notes</p>
+
+        </a>
+
+        <a href="/pyq" class="card">
+
+            <h2>📄 Previous Year Papers</h2>
+
+            <p>View PYQs</p>
+
+        </a>
+
+        <a href="/logout" class="card logout">
+
+            <h2>🚪 Logout</h2>
+
+            <p>Sign out safely</p>
+
+        </a>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

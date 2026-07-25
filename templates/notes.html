@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notes | Study Planner</title>
+
+    <link rel="stylesheet"
+        href="{{ url_for('static', filename='css/dashboard.css') }}">
+
+    <link rel="stylesheet"
+        href="{{ url_for('static', filename='css/responsive.css') }}">
+
+    <!-- <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/dashboard.css') }}"> -->
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+            📚 Study Planner
+        </div>
+
+        <div class="nav-links">
+            <a href="/dashboard">Dashboard</a>
+            <a href="/notes">Notes</a>
+            <a href="/pyq">PYQs</a>
+            <a href="/upload">Upload</a>
+             <a href="/profile">Profile</a>
+            <a href="/logout" class="logout-btn">Logout</a>
+        </div>
+
+    </nav>
+
+    <div class="container">
+
+        <h1>📚 Study Notes</h1>
+
+        <p class="subtitle">
+            Browse and download study notes.
+        </p>
+
+        <!-- ================= SEARCH & FILTER ================= -->
+
+        <form action="/notes" method="GET" class="search-form">
+
+            <input
+                type="text"
+                name="search"
+                placeholder="Search by Title or Subject..."
+                value="{{ search }}">
+
+            <select name="branch">
+
+                <option value="">All Branches</option>
+
+                <option value="IT" {% if branch=="IT" %}selected{% endif %}>IT</option>
+                <option value="CSE" {% if branch=="CSE" %}selected{% endif %}>CSE</option>
+                <option value="AIML" {% if branch=="AIML" %}selected{% endif %}>AIML</option>
+                <option value="AIDS" {% if branch=="AIDS" %}selected{% endif %}>AIDS</option>
+                <option value="ENTC" {% if branch=="ENTC" %}selected{% endif %}>ENTC</option>
+                <option value="Mechanical" {% if branch=="Mechanical" %}selected{% endif %}>Mechanical</option>
+                <option value="Civil" {% if branch=="Civil" %}selected{% endif %}>Civil</option>
+
+            </select>
+
+            <select name="semester">
+
+                <option value="">All Semesters</option>
+
+                {% for i in range(1,9) %}
+                    <option value="{{ i }}"
+                        {% if semester == i|string %}selected{% endif %}>
+                        Semester {{ i }}
+                    </option>
+                {% endfor %}
+
+            </select>
+
+            <button type="submit">
+                🔍 Search
+            </button>
+
+        </form>
+
+        <!-- ================= NOTES ================= -->
+
+        <div class="cards">
+
+            {% if notes %}
+
+                {% for note in notes %}
+
+                    <div class="card">
+
+                        <h2>{{ note["title"] }}</h2>
+
+                        <p><strong>Subject:</strong> {{ note["subject"] }}</p>
+
+                        <p><strong>Branch:</strong> {{ note["branch"] }}</p>
+
+                        <p><strong>Semester:</strong> {{ note["semester"] }}</p>
+
+                        <div class="button-group">
+
+                            <a href="{{ url_for('static', filename='uploads/' + note['filename']) }}"
+                               target="_blank"
+                               class="view-btn">
+                                👁️ View PDF
+                            </a>
+
+                            <a href="{{ url_for('static', filename='uploads/' + note['filename']) }}"
+                               download
+                               class="download-btn">
+                                📥 Download
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                {% endfor %}
+
+            {% else %}
+
+                <div class="card">
+
+                    <h2>No Notes Found</h2>
+
+                    <p>No notes match your search or filter.</p>
+
+                </div>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

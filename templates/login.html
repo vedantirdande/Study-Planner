@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login | Study Planner</title>
+
+    <link rel="stylesheet"
+        href="{{ url_for('static', filename='css/dashboard.css') }}">
+
+    <link rel="stylesheet"
+        href="{{ url_for('static', filename='css/responsive.css') }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/login.css') }}">
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="form-box">
+
+        <h1>Welcome Back</h1>
+
+        <p>Login using your Registration Number</p>
+
+        <!-- Flash Messages -->
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="message">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <form action="/login" method="POST">
+
+            <!-- Registration Number -->
+            <input
+                type="text"
+                name="roll_number"
+                placeholder="Registration Number"
+                required>
+
+            <!-- Password -->
+            <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Password"
+                required>
+
+            <label class="show-password">
+                <input type="checkbox" onclick="togglePassword()">
+                Show Password
+            </label>
+
+            <button type="submit">
+                Login
+            </button>
+
+        </form>
+
+        <p class="login-link">
+
+            Don't have an account?
+
+            <a href="/register">Create Account</a>
+
+        </p>
+
+    </div>
+
+</div>
+
+<script>
+
+function togglePassword() {
+
+    let password = document.getElementById("password");
+
+    if (password.type === "password") {
+        password.type = "text";
+    } else {
+        password.type = "password";
+    }
+
+}
+
+</script>
+
+</body>
+</html>

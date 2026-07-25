@@ -1,0 +1,177 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:#0f172a;
+    color:#fff;
+}
+
+/* NAVBAR */
+
+.navbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:20px 8%;
+    background:#111827;
+    position:sticky;
+    top:0;
+}
+
+.logo{
+    font-size:28px;
+    font-weight:bold;
+}
+
+.nav-links{
+    display:flex;
+    gap:25px;
+}
+
+.nav-links a{
+    color:white;
+    text-decoration:none;
+    transition:.3s;
+}
+
+.nav-links a:hover{
+    color:#60a5fa;
+}
+
+/* HERO */
+
+.hero{
+    text-align:center;
+    padding:100px 20px;
+}
+
+.hero h1{
+    font-size:52px;
+    margin-bottom:20px;
+}
+
+.hero p{
+    color:#cbd5e1;
+    font-size:20px;
+    max-width:700px;
+    margin:auto;
+    line-height:1.6;
+}
+
+.hero-buttons{
+    margin-top:35px;
+}
+
+.btn-primary,
+.btn-secondary{
+    display:inline-block;
+    padding:14px 35px;
+    margin:10px;
+    border-radius:10px;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+.btn-primary{
+    background:#2563eb;
+    color:white;
+}
+
+.btn-secondary{
+    background:white;
+    color:#2563eb;
+}
+
+.btn-primary:hover{
+    background:#1d4ed8;
+}
+
+.btn-secondary:hover{
+    background:#e2e8f0;
+}
+
+/* FEATURES */
+
+.features{
+    padding:80px 8%;
+    text-align:center;
+}
+
+.features h2{
+    font-size:38px;
+    margin-bottom:40px;
+}
+
+.feature-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:30px;
+}
+
+.feature-card{
+    background:#1e293b;
+    padding:35px;
+    border-radius:18px;
+    transition:.3s;
+}
+
+.feature-card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 0 25px rgba(59,130,246,.5);
+}
+
+.icon{
+    font-size:55px;
+    margin-bottom:20px;
+}
+
+/* WHY */
+
+.why{
+    padding:80px 8%;
+    text-align:center;
+}
+
+.why h2{
+    font-size:38px;
+    margin-bottom:40px;
+}
+
+.why-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:25px;
+}
+
+.why-card{
+    background:#111827;
+    padding:30px;
+    border-radius:15px;
+    transition:.3s;
+}
+
+.why-card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 0 20px rgba(96,165,250,.5);
+}
+
+/* FOOTER */
+
+footer{
+    text-align:center;
+    padding:40px 20px;
+    background:#020617;
+}
+
+footer h3{
+    margin-bottom:15px;
+}
+
+footer p{
+    color:#94a3b8;
+    margin:5px 0;
+}

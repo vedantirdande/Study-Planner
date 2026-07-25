@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Resource | Study Planner</title>
+
+    <link rel="stylesheet"
+        href="{{ url_for('static', filename='css/dashboard.css') }}">
+
+    <link rel="stylesheet"
+        href="{{ url_for('static', filename='css/responsive.css') }}">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/upload.css') }}">
+    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}"> -->
+</head>
+<body>
+
+<!-- ================= NAVBAR ================= -->
+
+<nav class="navbar">
+
+    <div class="logo">
+        📚 Study Planner
+    </div>
+
+    <div class="nav-links">
+
+        <a href="/dashboard">Home</a>
+
+        <a href="/notes">Notes</a>
+
+        <a href="/pyq">PYQs</a>
+
+        <a href="/upload">Upload</a>
+
+        <a href="/profile">Profile</a>
+
+        <a href="/logout" class="logout-btn">Logout</a>
+
+    </div>
+
+</nav>
+
+
+<div class="container">
+
+    <h1>📤 Upload Study Resource</h1>
+
+    {% with messages = get_flashed_messages(category_filter=["upload"]) %}
+    {% if messages %}
+        {% for message in messages %}
+            <div class="message">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+
+        <input
+            type="text"
+            name="title"
+            placeholder="Resource Title"
+            required>
+
+        <input
+            type="text"
+            name="subject"
+            placeholder="Subject Name"
+            required>
+
+        <select name="branch" required>
+            <option value="">Select Branch</option>
+            <option>IT</option>
+            <option>CSE</option>
+            <option>AIML</option>
+            <option>AIDS</option>
+            <option>ENTC</option>
+            <option>Mechanical</option>
+            <option>Civil</option>
+        </select>
+
+        <select name="semester" required>
+            <option value="">Select Semester</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+            <option>7</option>
+            <option>8</option>
+        </select>
+
+        <select name="resource_type" required>
+            <option value="">Select Resource Type</option>
+            <option value="Notes">📒 Notes</option>
+            <option value="PYQ">📝 Previous Year Question Papers</option>
+            <option value="Assignment">📑 Assignment</option>
+            <option value="Lab Manual">🧪 Lab Manual</option>
+            <option value="Practical">💻 Practical File</option>
+            <option value="Syllabus">📚 Syllabus</option>
+        </select>
+
+        <input
+            type="file"
+            name="pdf"
+            accept=".pdf"
+            required>
+
+        <button type="submit">
+            ⬆ Upload Resource
+        </button>
+
+    </form>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PYQs | Study Planner</title>
+
+    <link rel="stylesheet"
+        href="{{ url_for('static', filename='css/dashboard.css') }}">
+
+    <link rel="stylesheet"
+        href="{{ url_for('static', filename='css/responsive.css') }}">
+
+    <!-- <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/dashboard.css') }}"> -->
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+
+    <nav class="navbar">
+        <!-- <a href="/profile">Profile</a> -->
+
+        <div class="logo">
+            📚 Study Planner
+        </div>
+
+        <div class="nav-links">
+            <a href="/dashboard">Dashboard</a>
+            <a href="/notes">Notes</a>
+            <a href="/pyq">PYQs</a>
+            <a href="/upload">Upload</a>
+             <a href="/profile">Profile</a>
+            <a href="/logout" class="logout-btn">Logout</a>
+        </div>
+
+    </nav>
+
+    <div class="container">
+
+        <h1>📄 Previous Year Question Papers</h1>
+
+        <p class="subtitle">
+            Browse and download previous year question papers.
+        </p>
+        
+        <!-- ================= SEARCH ================= -->
+
+        <form action="/pyq" method="GET" class="search-form">
+
+            <input
+                type="text"
+                name="search"
+                placeholder="Search by Title or Subject..."
+                value="{{ search }}">
+
+            <button type="submit">
+            🔍 Search
+            </button>
+
+        </form>
+
+
+        <div class="cards">
+
+            {% if pyqs %}
+
+                {% for pyq in pyqs %}
+
+                    <div class="card">
+
+                        <h2>{{ pyq["title"] }}</h2>
+
+                        <p><strong>Subject:</strong> {{ pyq["subject"] }}</p>
+
+                        <p><strong>Branch:</strong> {{ pyq["branch"] }}</p>
+
+                        <p><strong>Semester:</strong> {{ pyq["semester"] }}</p>
+
+                        <div class="button-group">
+
+                            <a href="{{ url_for('static', filename='uploads/' + pyq['filename']) }}"
+                               target="_blank"
+                               class="view-btn">
+                                👁️ View PDF
+                            </a>
+
+                            <a href="{{ url_for('static', filename='uploads/' + pyq['filename']) }}"
+                               download
+                               class="download-btn">
+                                📥 Download
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                {% endfor %}
+
+            {% else %}
+
+                <div class="card">
+
+                    <h2>No PYQs Available</h2>
+
+                    <p>No previous year question papers have been uploaded yet.</p>
+
+                </div>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

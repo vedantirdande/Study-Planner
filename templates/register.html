@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | Study Planner </title>
+
+    <link rel="stylesheet"
+        href="{{ url_for('static', filename='css/dashboard.css') }}">
+
+    <link rel="stylesheet"
+        href="{{ url_for('static', filename='css/responsive.css') }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/login.css') }}">
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="form-box">
+
+        <h1>Create Account</h1>
+
+        <p>Welcome to Study Planner</p>
+
+         <!-- Flash Messages Start -->
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="message">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        <!-- Flash Messages End -->
+
+        <form action="/register" method="POST">
+
+            <input
+                type="text"
+                name="full_name"
+                placeholder="Full Name"
+                required>
+
+            <input
+                type="email"
+                name="email"
+                placeholder="Personal Email"
+                required>
+
+            <input
+                type="text"
+                name="roll_number"
+                placeholder="Registration Number"
+                required>
+
+            <select name="branch" required>
+
+                <option value="">Select Branch</option>
+
+                <option>IT</option>
+                <option>CSE</option>
+                <option>AIML</option>
+                <option>AIDS</option>
+                <option>ENTC</option>
+                <option>Mechanical</option>
+                <option>Civil</option>
+
+            </select>
+
+            <select name="semester" required>
+
+                <option value="">Select Semester</option>
+
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+
+            </select>
+
+            <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Password"
+                required>
+
+            <label class="show-password">
+                <input type="checkbox" onclick="togglePassword()">
+                Show Password
+            </label>
+
+            <small class="password-hint">
+                Password must contain:
+                <br>✓ At least 8 characters
+                <br>✓ One uppercase letter (A-Z)
+                <br>✓ One lowercase letter (a-z)
+                <br>✓ One number (0-9)
+                <br>✓ One special character (@, #, $, %, etc.)
+            </small>
+
+            <input
+                type="password"
+                id="confirm_password"
+                name="confirm_password"
+                placeholder="Confirm Password"
+                required>
+
+            <label class="show-password">
+                <input type="checkbox" onclick="toggleConfirmPassword()">
+                Show Confirm Password
+            </label>
+
+            <button type="submit">
+
+                Register
+
+            </button>
+
+        </form>
+
+        <p class="login-link">
+
+            Already have an account?
+
+            <a href="/login">Login</a>
+
+        </p>
+
+    </div>
+
+</div>
+
+<script>
+
+function togglePassword() {
+
+    let password = document.getElementById("password");
+
+    if (password.type === "password") {
+        password.type = "text";
+    } else {
+        password.type = "password";
+    }
+
+}
+
+function toggleConfirmPassword() {
+
+    let confirmPassword = document.getElementById("confirm_password");
+
+    if (confirmPassword.type === "password") {
+        confirmPassword.type = "text";
+    } else {
+        confirmPassword.type = "password";
+    }
+
+}
+
+</script>
+
+</body>
+
+</html>

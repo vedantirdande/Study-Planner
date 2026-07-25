@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Planner</title>
+
+    <link rel="stylesheet"
+        href="{{ url_for('static', filename='css/dashboard.css') }}">
+
+    <link rel="stylesheet"
+        href="{{ url_for('static', filename='css/responsive.css') }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+
+<nav class="navbar">
+
+    <div class="logo">
+        📚 Study Planner
+    </div>
+
+    <div class="nav-links">
+
+        <a href="/">Home</a>
+        <a href="/login">Login</a>
+        <a href="/register">Register</a>
+
+    </div>
+
+</nav>
+
+<!-- ================= HERO ================= -->
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <h1>Welcome to Study Planner</h1>
+
+        <p>
+            Find Notes, Previous Year Question Papers and
+            Study Resources for GHRCEM Students.
+        </p>
+
+        <div class="hero-buttons">
+
+            <a href="/login" class="btn-primary">Login</a>
+
+            <a href="/register" class="btn-secondary">Register</a>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ================= FEATURES ================= -->
+
+<section class="features">
+
+    <h2>Resources Available</h2>
+
+    <div class="feature-grid">
+
+        <div class="feature-card">
+
+            <div class="icon">📚</div>
+
+            <h3>Notes</h3>
+
+            <p>Well-organized notes for every semester.</p>
+
+        </div>
+
+        <div class="feature-card">
+
+            <div class="icon">📄</div>
+
+            <h3>PYQs</h3>
+
+            <p>Previous year question papers for exam preparation.</p>
+
+        </div>
+
+        <div class="feature-card">
+
+            <div class="icon">📤</div>
+
+            <h3>Upload</h3>
+
+            <p>Share study materials with your classmates.</p>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ================= WHY CHOOSE ================= -->
+
+<section class="why">
+
+    <h2>Why Choose Study Planner?</h2>
+
+    <div class="why-grid">
+
+        <div class="why-card">
+
+            <h3>⚡ Fast Access</h3>
+
+            <p>Find resources quickly with an easy interface.</p>
+
+        </div>
+
+        <div class="why-card">
+
+            <h3>🔒 Secure Login</h3>
+
+            <p>Your uploaded resources remain linked to your account.</p>
+
+        </div>
+
+        <div class="why-card">
+
+            <h3>📱 Responsive</h3>
+
+            <p>Works smoothly on laptop, tablet and mobile.</p>
+
+        </div>
+
+        <div class="why-card">
+
+            <h3>🎯 Student Friendly</h3>
+
+            <p>Designed specially for GHRCEM students.</p>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <h3>📚 Study Planner</h3>
+
+    <p>Helping GHRCEM Students Learn Better.</p>
+
+    <p>© 2026 Study Planner | All Rights Reserved</p>
+
+</footer>
+
+</body>
+
+</html>

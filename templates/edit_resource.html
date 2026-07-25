@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Edit Resource | Study Planner</title>
+
+    <link rel="stylesheet"
+        href="{{ url_for('static', filename='css/dashboard.css') }}">
+
+    <link rel="stylesheet"
+        href="{{ url_for('static', filename='css/responsive.css') }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/upload.css') }}">
+
+</head>
+<body>
+
+<div class="container">
+
+    <a href="{{ url_for('profile') }}" class="back-btn">
+        ← Back to Profile
+    </a>
+
+    <h1>✏ Edit Resource</h1>
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="message">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <form method="POST">
+
+        <input
+            type="text"
+            name="title"
+            value="{{ resource['title'] }}"
+            required
+        >
+
+        <input
+            type="text"
+            name="subject"
+            value="{{ resource['subject'] }}"
+            required
+        >
+
+        <select name="branch" required>
+
+            <option value="IT" {% if resource["branch"]=="IT" %}selected{% endif %}>IT</option>
+            <option value="CSE" {% if resource["branch"]=="CSE" %}selected{% endif %}>CSE</option>
+            <option value="AIML" {% if resource["branch"]=="AIML" %}selected{% endif %}>AIML</option>
+            <option value="AIDS" {% if resource["branch"]=="AIDS" %}selected{% endif %}>AIDS</option>
+            <option value="ENTC" {% if resource["branch"]=="ENTC" %}selected{% endif %}>ENTC</option>
+            <option value="Mechanical" {% if resource["branch"]=="Mechanical" %}selected{% endif %}>Mechanical</option>
+            <option value="Civil" {% if resource["branch"]=="Civil" %}selected{% endif %}>Civil</option>
+
+        </select>
+
+        <select name="semester" required>
+
+            {% for i in range(1,9) %}
+            <option value="{{ i }}"
+            {% if resource["semester"]|int == i %}
+            selected
+            {% endif %}
+            >
+                Semester {{ i }}
+            </option>
+            {% endfor %}
+
+        </select>
+
+        <select name="resource_type" required>
+
+            <option value="Notes" {% if resource["resource_type"]=="Notes" %}selected{% endif %}>📒 Notes</option>
+
+            <option value="PYQ" {% if resource["resource_type"]=="PYQ" %}selected{% endif %}>📝 Previous Year Question Papers</option>
+
+            <option value="Assignment" {% if resource["resource_type"]=="Assignment" %}selected{% endif %}>📑 Assignment</option>
+
+            <option value="Lab Manual" {% if resource["resource_type"]=="Lab Manual" %}selected{% endif %}>🧪 Lab Manual</option>
+
+            <option value="Practical" {% if resource["resource_type"]=="Practical" %}selected{% endif %}>💻 Practical File</option>
+
+            <option value="Syllabus" {% if resource["resource_type"]=="Syllabus" %}selected{% endif %}>📚 Syllabus</option>
+
+        </select>
+
+        <button type="submit">
+            💾 Save Changes
+        </button>
+
+    </form>
+
+</div>
+
+</body>
+</html>
