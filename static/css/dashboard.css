@@ -14,8 +14,14 @@ body{
     padding:0;
     font-family:Arial, Helvetica, sans-serif;
 
-    background-color:rgba(15,23,42,.95);
-} 
+     background: linear-gradient(
+        180deg,
+        #C9D1DB 0%,
+        #D8DEE6 20%,
+        #E7EBF0 100%
+    );
+}
+
 /* ---------------- CONTAINER ---------------- */
 
 .container{
