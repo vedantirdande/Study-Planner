@@ -7,9 +7,7 @@
 
 body{
 
-   background:
-    linear-gradient(135deg,#0f172a,#1e3a8a);
-
+   background:rgb(173, 181, 189);
     display:flex;
 
     justify-content:center;

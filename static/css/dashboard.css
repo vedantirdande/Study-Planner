@@ -14,12 +14,7 @@ body{
     padding:0;
     font-family:Arial, Helvetica, sans-serif;
 
-     background: linear-gradient(
-        180deg,
-        #C9D1DB 0%,
-        #D8DEE6 20%,
-        #E7EBF0 100%
-    );
+     background-color:rgb(173, 181, 189);
 }
 
 /* ---------------- CONTAINER ---------------- */
@@ -47,7 +42,7 @@ h1{
 
 .subtitle{
 
-    color:#cbd5e1;
+    color:#052f46;
 
     margin-bottom:40px;
 
@@ -245,7 +240,7 @@ h1{
 
 .stat-card{
 
-   background:white;
+    background:rgb(248, 249, 250);
 
     backdrop-filter:blur(10px);
 
@@ -280,13 +275,13 @@ h1{
 
     margin-bottom:10px;
 
-    color:black;
+    color:rgb(33, 37, 41);
 
 }
 
 .stat-card h3{
 
-    color:#000000;
+    color:rgb(33, 37, 41);
 
     margin-bottom:8px;
 
@@ -294,7 +289,7 @@ h1{
 
 .stat-card p{
 
-    color:#000307;
+    color:rgb(33, 37, 41);
 
 }
 
