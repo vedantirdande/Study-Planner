@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Edit Resource | Study Portal{% endblock %}
+{% block content %}
+<section class="form-page"><div class="form-card">
+  <span class="eyebrow">MY RESOURCE</span><h1>✏️ Edit Resource</h1>
+  <form method="POST" class="form">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <label>Resource Title<input name="title" value="{{ resource.title }}" maxlength="120" required></label>
+    <label>Subject<input name="subject" value="{{ resource.subject }}" maxlength="100" required></label>
+    <div class="form-grid">
+      <label>Branch<select name="branch" required>{% for b in branches %}<option {% if resource.branch==b %}selected{% endif %}>{{ b }}</option>{% endfor %}</select></label>
+      <label>Semester<select name="semester" required>{% for i in range(1,9) %}<option value="{{ i }}" {% if resource.semester|int==i %}selected{% endif %}>Semester {{ i }}</option>{% endfor %}</select></label>
+    </div>
+    <label>Resource Type<select name="resource_type" required>{% for t in resource_types %}<option {% if resource.resource_type==t %}selected{% endif %}>{{ t }}</option>{% endfor %}</select></label>
+    <div class="form-actions"><a class="btn ghost" href="{{ url_for('profile') }}">Cancel</a><button class="btn primary" type="submit">Save Changes</button></div>
+  </form>
+</div></section>
+{% endblock %}

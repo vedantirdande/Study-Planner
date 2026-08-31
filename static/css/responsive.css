@@ -1,0 +1,77 @@
+/* Shared responsive rules. This file is loaded after the page styles. */
+
+@media (max-width: 992px) {
+  .section, .page-head, .filter-panel, .resource-grid, .profile-layout,
+  .form-page, .admin-section, .stats-grid, .card-grid, .dashboard-section {
+    width: min(100% - 40px, 920px);
+  }
+
+  .feature-grid, .card-grid, .stats-grid, .stats-section {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .profile-layout { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 700px) {
+  body { overflow-x: hidden; }
+
+  .site-header { min-height: 64px; padding-inline: 18px; }
+  .menu-toggle { display: block; min-width: 44px; min-height: 44px; }
+  .nav-links {
+    display: none;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 64px;
+    padding: 12px 18px 18px;
+    background: #102a43;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 4px;
+    box-shadow: 0 12px 20px rgba(16, 42, 67, .18);
+  }
+  .nav-open .nav-links { display: flex; }
+  .nav-links a { padding: 11px 12px; text-align: center; }
+
+  .hero { min-height: 470px; padding: 78px 20px; }
+  .hero h1 { font-size: clamp(38px, 11vw, 58px); letter-spacing: -1.8px; }
+  .hero p { font-size: 16px; }
+  .hero-actions { justify-content: stretch; }
+  .hero-actions .btn { flex: 1 1 180px; }
+
+  .section, .page-head, .filter-panel, .resource-grid, .profile-layout,
+  .form-page, .admin-section, .stats-grid, .card-grid, .dashboard-section {
+    width: min(100% - 32px, 560px);
+  }
+  .page-head { margin-top: 38px; }
+  .dashboard-head { align-items: stretch; flex-direction: column; gap: 18px; }
+  .dashboard-head .btn { width: 100%; justify-content: center; }
+  .dashboard-section { margin-top: 42px; margin-bottom: 42px; }
+
+  .feature-grid, .card-grid, .stats-grid, .stats-section, .recent-grid,
+  .form-grid { grid-template-columns: 1fr; }
+  .search-form { grid-template-columns: 1fr; }
+  .search-form input { grid-column: auto; }
+  .search-form input, .search-form select, .search-form button { width: 100%; min-width: 0; }
+  .form-card, .auth-card { padding: 24px; }
+  .form-card .form-actions, .page-head .form-actions { justify-content: stretch; }
+  .form-card .form-actions .btn, .page-head .form-actions .btn { flex: 1; text-align: center; }
+  .recent-card { align-items: flex-start; flex-wrap: wrap; }
+  .recent-card .btn { margin-left: 56px; }
+  .profile-table, .table-wrap { overflow-x: auto; }
+  .profile-table { display: block; }
+  .profile-table td:first-child { width: auto; }
+  .admin-header { align-items: stretch; flex-direction: column; }
+  .admin-stats { grid-template-columns: 1fr; }
+  .inline-form { align-items: stretch; flex-direction: column; }
+  .site-footer { align-items: flex-start; flex-direction: column; gap: 8px; }
+}
+
+@media (max-width: 480px) {
+  .brand { font-size: 16px; }
+  .brand-mark { width: 29px; height: 29px; font-size: 16px; }
+  .page-head h1 { font-size: 34px; }
+  .card-grid .action-card, .feature-card, .resource-card, .stat-card { padding: 20px; }
+  .button-group { grid-template-columns: 1fr; }
+}

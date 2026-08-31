@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Register | Study Portal{% endblock %}
+{% block content %}
+<section class="auth-page">
+  <div class="auth-card wide">
+    <div class="auth-icon">🎓</div>
+    <h1>Create your account</h1><p>Join the Study Portal student resource community.</p>
+    <form method="POST" class="form">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <div class="form-grid">
+        <label>Full Name<input name="full_name" autocomplete="name" placeholder="Your full name" required></label>
+        <label>Email<input type="email" name="email" autocomplete="email" placeholder="you@example.com" required></label>
+        <label>Registration Number<input name="roll_number" placeholder="Registration number" required></label>
+        <label>Branch<select name="branch" required><option value="">Select branch</option>{% for b in ['IT','CSE','AIML','AIDS','ENTC','Mechanical','Civil'] %}<option>{{ b }}</option>{% endfor %}</select></label>
+        <label>Semester<select name="semester" required><option value="">Select semester</option>{% for i in range(1,9) %}<option value="{{ i }}">Semester {{ i }}</option>{% endfor %}</select></label>
+        <label>Password<input type="password" id="password" name="password" autocomplete="new-password" required></label>
+        <label>Confirm Password<input type="password" id="confirm_password" name="confirm_password" autocomplete="new-password" required></label>
+      </div>
+      <div class="password-hint">Use 8–72 characters with uppercase, lowercase, a number and a special character.</div>
+      <div class="form-grid check-row"><label class="check"><input type="checkbox" onclick="toggleBoth()"> Show passwords</label></div>
+      <button class="btn primary full" type="submit">Create Account</button>
+    </form>
+    <p class="auth-footer">Already registered? <a href="{{ url_for('login') }}">Login</a></p>
+  </div>
+</section>
+{% endblock %}
+{% block scripts %}<script>function toggleBoth(){for(const id of ['password','confirm_password']){const e=document.getElementById(id);e.type=e.type==='password'?'text':'password';}}</script>{% endblock %}

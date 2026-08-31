@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Login | Study Portal{% endblock %}
+{% block content %}
+<section class="auth-page">
+  <div class="auth-card">
+    <div class="auth-icon">🔐</div>
+    <h1>Welcome back</h1><p>Log in with your registration number.</p>
+    <form method="POST" class="form">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <label>Registration Number<input name="roll_number" autocomplete="username" placeholder="e.g. 2526CTFBTITE016" required></label>
+      <label>Password<input type="password" id="password" name="password" autocomplete="current-password" placeholder="Your password" required></label>
+      <label class="check"><input type="checkbox" onclick="togglePassword('password')"> Show password</label>
+      <button class="btn primary full" type="submit">Login</button>
+    </form>
+    <p class="auth-footer">Don't have an account? <a href="{{ url_for('register') }}">Create one</a></p>
+  </div>
+</section>
+{% endblock %}
+{% block scripts %}<script>function togglePassword(id){const e=document.getElementById(id);e.type=e.type==='password'?'text':'password';}</script>{% endblock %}

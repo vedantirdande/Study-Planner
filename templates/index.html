@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Study Portal | Home{% endblock %}
+{% block content %}
+<section class="hero">
+  <div class="hero-content">
+    <span class="badge">🎓 Built for students</span>
+    <h1>Your study resources, <span>all in one place.</span></h1>
+    <p>Find notes, previous-year question papers and shared academic resources quickly — or upload useful material for your classmates.</p>
+    <div class="hero-actions">
+      {% if session.get('user_id') %}
+        <a class="btn primary" href="{{ url_for('dashboard') }}">Open Dashboard</a>
+        <a class="btn secondary" href="{{ url_for('upload') }}">Upload Resource</a>
+      {% else %}
+        <a class="btn primary" href="{{ url_for('register') }}">Create Account</a>
+        <a class="btn secondary" href="{{ url_for('login') }}">Login</a>
+      {% endif %}
+    </div>
+  </div>
+</section>
+<section class="section">
+  <div class="section-heading"><div><span class="eyebrow">PORTAL</span><h2>Everything you need to prepare</h2></div></div>
+  <div class="feature-grid">
+    <article class="feature-card"><div class="feature-icon">📚</div><h3>Study Notes</h3><p>Search notes by subject, branch and semester.</p><a href="{{ url_for('notes') if session.get('user_id') else url_for('login') }}">Explore Notes →</a></article>
+    <article class="feature-card"><div class="feature-icon">📄</div><h3>Previous Papers</h3><p>Practice with previous-year question papers.</p><a href="{{ url_for('pyq') if session.get('user_id') else url_for('login') }}">Explore PYQs →</a></article>
+    <article class="feature-card"><div class="feature-icon">🤝</div><h3>Share Knowledge</h3><p>Upload useful PDFs and help your classmates.</p><a href="{{ url_for('upload') if session.get('user_id') else url_for('register') }}">Share a Resource →</a></article>
+  </div>
+</section>
+<section class="section stats-section">
+  <div class="stat-card"><strong>{{ stats.total or 0 }}</strong><span>Total Resources</span></div>
+  <div class="stat-card"><strong>{{ stats.notes or 0 }}</strong><span>Notes</span></div>
+  <div class="stat-card"><strong>{{ stats.pyqs or 0 }}</strong><span>PYQs</span></div>
+</section>
+{% endblock %}

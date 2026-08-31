@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}PYQs | Study Portal{% endblock %}
+{% block content %}
+<section class="page-head compact"><span class="eyebrow">PYQS</span><h1>📄 Previous Year Question Papers</h1><p>Browse and download previous-year question papers.</p></section>
+<section class="filter-panel">
+<form method="GET" class="search-form">
+  <input name="search" value="{{ search }}" placeholder="Search by title or subject…" aria-label="Search">
+  <select name="branch"><option value="">All Branches</option>{% for b in ['IT','CSE','AIML','AIDS','ENTC','Mechanical','Civil'] %}<option value="{{ b }}" {% if branch==b %}selected{% endif %}>{{ b }}</option>{% endfor %}</select>
+  <select name="semester"><option value="">All Semesters</option>{% for i in range(1,9) %}<option value="{{ i }}" {% if semester==i|string %}selected{% endif %}>Semester {{ i }}</option>{% endfor %}</select>
+  <button class="btn primary" type="submit">🔍 Search</button>
+  <a class="btn ghost" href="{{ request.path }}">Reset</a>
+</form>
+</section>
+<section class="resource-grid">
+{% for item in pyqs %}
+<article class="resource-card">
+  <div class="resource-icon">{{ '📚' if item.resource_type=='Notes' else '📄' }}</div>
+  <div class="resource-body"><span class="tag">{{ item.resource_type }}</span><h2>{{ item.title }}</h2><p>{{ item.subject }}</p><div class="meta"><span>{{ item.branch }}</span><span>Semester {{ item.semester }}</span></div></div>
+  <div class="resource-actions">
+    <a class="btn small primary" target="_blank" rel="noopener" href="{{ url_for('static', filename='uploads/' + item.filename) }}">View PDF</a>
+    <a class="btn small secondary" download href="{{ url_for('static', filename='uploads/' + item.filename) }}">Download</a>
+  </div>
+</article>
+{% else %}
+<div class="empty-state"><div>📭</div><h2>No resources found</h2><p>Try a different search/filter or upload the first resource.</p><a class="btn primary" href="{{ url_for('upload') }}">Upload Resource</a></div>
+{% endfor %}
+</section>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Profile | Study Portal{% endblock %}
+{% block content %}
+<section class="page-head compact"><span class="eyebrow">ACCOUNT</span><h1>👤 My Profile</h1><p>Your account details and shared resources.</p></section>
+<section class="profile-layout">
+  <article class="profile-card"><div class="avatar">👤</div><h2>{{ user.full_name }}</h2><span class="tag">{{ user.role|capitalize }}</span><dl><dt>Email</dt><dd>{{ user.email }}</dd><dt>Registration No.</dt><dd>{{ user.roll_number }}</dd><dt>Branch</dt><dd>{{ user.branch }}</dd><dt>Semester</dt><dd>{{ user.semester }}</dd></dl></article>
+  <div>
+    <section class="stats-grid small"><div class="stat-card"><strong>{{ stats.total_uploads or 0 }}</strong><span>Uploads</span></div><div class="stat-card"><strong>{{ stats.total_notes or 0 }}</strong><span>Notes</span></div><div class="stat-card"><strong>{{ stats.total_pyqs or 0 }}</strong><span>PYQs</span></div></section>
+  </div>
+</section>
+<section class="section"><div class="section-heading"><div><span class="eyebrow">YOUR FILES</span><h2>Uploaded Resources</h2></div><a class="btn primary small" href="{{ url_for('upload') }}">+ Upload</a></div>
+<div class="resource-grid">
+{% for file in uploads %}
+<article class="resource-card"><div class="resource-icon">📄</div><div class="resource-body"><span class="tag">{{ file.resource_type }}</span><h2>{{ file.title }}</h2><p>{{ file.subject }} · {{ file.branch }} · Sem {{ file.semester }}</p></div><div class="resource-actions"><a class="btn small primary" target="_blank" rel="noopener" href="{{ url_for('static', filename='uploads/' + file.filename) }}">View</a><a class="btn small ghost" href="{{ url_for('edit_resource', id=file.id) }}">Edit</a><form method="POST" action="{{ url_for('delete_resource', id=file.id) }}" onsubmit="return confirm('Delete this resource permanently?')"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><button class="btn small danger" type="submit">Delete</button></form></div></article>
+{% else %}<div class="empty-state"><div>📭</div><h2>No uploads yet</h2><p>Share your first study resource.</p><a class="btn primary" href="{{ url_for('upload') }}">Upload Resource</a></div>{% endfor %}
+</div></section>
+{% endblock %}
