@@ -1,0 +1,12 @@
+[33mcommit 265609a19f5ece003c3f2c5df82b5c135f42b94e[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Vedant Irdande <irdandevedant@gmail.com>
+Date:   Mon Sep 7 09:31:48 2026 +0530
+
+    Implement dark mode styling and theme toggle functionality
+
+ static/css/dark-mode.css | 84 [32m++++++++++++++++++++++++++++++++++++++++++++++++[m
+ static/css/polish.css    | 30 [32m+++++++++++++++[m[31m--[m
+ static/js/script.js      | 62 [32m+++++++++++++++++++++++++++++++++++[m
+ templates/base.html      |  7 [32m+++[m[31m-[m
+ templates/dashboard.html | 40 [32m+++++++++++++++[m[31m--------[m
+ 5 files changed, 206 insertions(+), 17 deletions(-)
