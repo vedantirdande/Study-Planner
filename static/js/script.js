@@ -33,30 +33,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
 	const search = dashboard.querySelector("[data-resource-search]");
 	const resourceCards = [...dashboard.querySelectorAll("[data-resource-card]")];
-	const resourceToggle = dashboard.querySelector("[data-resource-toggle]");
 	const resourceEmpty = dashboard.querySelector("[data-resource-empty]");
-	let showAll = false;
 
 	const updateResources = () => {
 		const query = (search?.value || "").trim().toLowerCase();
 		const matches = resourceCards.filter((card) => card.textContent.toLowerCase().includes(query));
 		resourceCards.forEach((card) => {
-			const visible = matches.includes(card) && (showAll || matches.indexOf(card) < 4);
-			card.hidden = !visible;
+			card.hidden = !matches.includes(card);
 		});
-		if (resourceToggle) {
-			resourceToggle.hidden = matches.length <= 4;
-			resourceToggle.textContent = showAll ? "Show less" : "Show more";
-		}
 		if (resourceEmpty) resourceEmpty.hidden = matches.length > 0 || resourceCards.length === 0;
 	};
 
 	if (search && resourceCards.length) {
 		search.addEventListener("input", updateResources);
-		resourceToggle?.addEventListener("click", () => {
-			showAll = !showAll;
-			updateResources();
-		});
 		updateResources();
 	}
 });
