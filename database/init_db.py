@@ -16,7 +16,6 @@ CREATE TABLE IF NOT EXISTS users (
     branch TEXT NOT NULL,
     semester INTEGER NOT NULL CHECK (semester BETWEEN 1 AND 8),
     password_hash TEXT NOT NULL,
-    role TEXT NOT NULL DEFAULT 'student' CHECK (role IN ('student', 'admin')),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 )
 """)

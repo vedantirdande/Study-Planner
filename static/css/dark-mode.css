@@ -34,17 +34,13 @@ body.dark-mode {
 body.dark-mode .hero { background: linear-gradient(115deg, #1a3739 0%, #101923 54%, #3a2d28 100%); }
 body.dark-mode .badge,
 body.dark-mode .btn.secondary,
-body.dark-mode .action-card.admin-action,
 body.dark-mode .auth-icon,
 body.dark-mode .avatar { background: #24445b; color: #f3f7fb; }
-body.dark-mode .action-card.admin-action { border-color: #24445b; }
 body.dark-mode .site-footer { background: #0c141d; color: #a8b5c3; }
-body.dark-mode .hero p,
-body.dark-mode .admin-header p:not(.eyebrow) { color: var(--muted); }
+body.dark-mode .hero p { color: var(--muted); }
 body.dark-mode h1,
 body.dark-mode h2,
 body.dark-mode h3,
-body.dark-mode .admin-header h1,
 body.dark-mode .stat-card strong { color: var(--ink); }
 body.dark-mode .btn.ghost,
 body.dark-mode .card,
@@ -61,18 +57,15 @@ body.dark-mode select,
 body.dark-mode .library-empty,
 body.dark-mode .dashboard-empty,
 body.dark-mode .empty-state,
-body.dark-mode .admin-message,
 body.dark-mode .message { background: var(--surface); color: var(--ink); }
 body.dark-mode input,
 body.dark-mode select { border-color: var(--line); }
 body.dark-mode .tag { background: #482b28; color: #ffad95; }
 body.dark-mode .meta span { background: #22332f; color: var(--muted); }
-body.dark-mode .admin-stats div,
 body.dark-mode .table-wrap { background: var(--surface); }
 body.dark-mode th { background: #202f3b; color: var(--muted); }
 body.dark-mode th,
 body.dark-mode td { border-color: var(--line); }
-body.dark-mode .admin-message { border-left-color: var(--yellow); color: #f4d9a2; }
 body.dark-mode .auth-page { background: linear-gradient(135deg, #1a3739, #101923 60%, #3a2d28); }
 body.dark-mode .form label { color: var(--ink); }
 body.dark-mode .show-password,

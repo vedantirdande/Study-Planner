@@ -1,11 +1,11 @@
 {% extends "base.html" %}
-{% block title %}Study Portal | Home{% endblock %}
+{% block title %}GHRCEM Study Portal | Home{% endblock %}
 {% block content %}
 <section class="hero">
   <div class="hero-content">
-    <span class="badge">🎓 Built for students</span>
+    <span class="badge">🎓 GHRCEM · Student Resource Library</span>
     <h1>Your study resources, <span>all in one place.</span></h1>
-    <p>Find notes, previous-year question papers and shared academic resources quickly — or upload useful material for your classmates.</p>
+    <p>Securely access semester-wise notes and previous-year question papers, find materials by subject, and share useful PDFs with fellow students.</p>
     <div class="hero-actions">
       {% if session.get('user_id') %}
         <a class="btn primary" href="{{ url_for('dashboard') }}">Open Dashboard</a>

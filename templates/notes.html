@@ -17,8 +17,8 @@
   <div class="resource-icon">{{ '📚' if item.resource_type=='Notes' else '📄' }}</div>
   <div class="resource-body"><span class="tag">{{ item.resource_type }}</span><h2>{{ item.title }}</h2><p>{{ item.subject }}</p><div class="meta"><span>{{ item.branch }}</span><span>Semester {{ item.semester }}</span></div></div>
   <div class="resource-actions">
-    <a class="btn small primary" target="_blank" rel="noopener" href="{{ url_for('static', filename='uploads/' + item.filename) }}">View PDF</a>
-    <a class="btn small secondary" download href="{{ url_for('static', filename='uploads/' + item.filename) }}">Download</a>
+    <a class="btn small primary" target="_blank" rel="noopener" href="{{ url_for('download_resource', resource_id=item.id) }}">View PDF</a>
+    <a class="btn small secondary" href="{{ url_for('download_resource', resource_id=item.id, download=1) }}">Download</a>
   </div>
 </article>
 {% else %}

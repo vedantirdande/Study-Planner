@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Study Portal — notes, previous year papers and student resources.">
-  <title>{% block title %}Study Portal{% endblock %}</title>
+  <meta name="description" content="GHRCEM Study Portal — a student resource library for semester-wise notes and previous-year question papers.">
+  <title>{% block title %}GHRCEM Study Portal{% endblock %}</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
@@ -17,7 +17,7 @@
 <body>
 <a class="skip-link" href="#main-content">Skip to content</a>
 <header class="site-header">
-  <a class="brand" href="{{ url_for('home') }}"><span class="brand-mark">S</span><span>Study <em>Portal</em></span></a>
+  <a class="brand" href="{{ url_for('home') }}"><span class="brand-mark">G</span><span>GHRCEM <em>Study Portal</em></span></a>
   <button class="menu-toggle" type="button" aria-label="Toggle navigation" onclick="document.body.classList.toggle('nav-open')">☰</button>
   <nav class="nav-links" aria-label="Main navigation">
     <button class="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false" data-theme-toggle>
@@ -29,7 +29,6 @@
       <a class="{% if request.endpoint == 'pyq' %}active{% endif %}" href="{{ url_for('pyq') }}">PYQs</a>
       <a class="{% if request.endpoint == 'upload' %}active{% endif %}" href="{{ url_for('upload') }}">Upload</a>
       <a class="{% if request.endpoint in ['profile', 'edit_resource'] %}active{% endif %}" href="{{ url_for('profile') }}">Profile</a>
-      {% if session.get('user_role') == 'admin' %}<a class="nav-admin {% if request.endpoint == 'admin_panel' %}active{% endif %}" href="{{ url_for('admin_panel') }}"><span>⌘</span> Admin</a>{% endif %}
       <a class="nav-danger" href="{{ url_for('logout') }}">Logout</a>
     {% else %}
       <a href="{{ url_for('home') }}">Home</a>
@@ -52,7 +51,7 @@
 <main id="main-content">{% block content %}{% endblock %}</main>
 
 <footer class="site-footer">
-  <strong><span class="brand-mark small">S</span> Study Portal</strong>
+  <strong><span class="brand-mark small">G</span> GHRCEM Study Portal</strong>
   <span>Share knowledge. Prepare better. Learn together.</span>
   <span>© 2026 Study Portal</span>
 </footer>

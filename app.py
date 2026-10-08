@@ -6,13 +6,14 @@ import uuid
 from functools import wraps
 from pathlib import Path
 
-from flask import Flask, abort, flash, redirect, render_template, request, session, url_for
+from flask import Flask, abort, flash, redirect, render_template, request, send_from_directory, session, url_for
 from werkzeug.security import check_password_hash, generate_password_hash
 from werkzeug.utils import secure_filename
 
 BASE_DIR = Path(__file__).resolve().parent
 DATABASE = BASE_DIR / "database.db"
-UPLOAD_FOLDER = BASE_DIR / "static" / "uploads"
+UPLOAD_FOLDER = BASE_DIR / "uploads"
+LEGACY_UPLOAD_FOLDER = BASE_DIR / "static" / "uploads"
 ALLOWED_EXTENSIONS = {"pdf"}
 MAX_FILE_SIZE = 10 * 1024 * 1024  # 10 MB
 
@@ -30,6 +31,16 @@ app.config.update(
 )
 
 UPLOAD_FOLDER.mkdir(parents=True, exist_ok=True)
+if LEGACY_UPLOAD_FOLDER.is_dir():
+    for legacy_file in LEGACY_UPLOAD_FOLDER.iterdir():
+        if legacy_file.is_file():
+            destination = UPLOAD_FOLDER / legacy_file.name
+            if destination.exists():
+                if destination.read_bytes() != legacy_file.read_bytes():
+                    raise FileExistsError(f"Cannot migrate legacy upload; destination already exists: {destination}")
+                legacy_file.unlink()
+            else:
+                legacy_file.replace(destination)
 
 
 def get_db():
@@ -80,19 +91,6 @@ def login_required(view):
         if "user_id" not in session:
             flash("Please log in to continue.", "error")
             return redirect(url_for("login"))
-        return view(*args, **kwargs)
-    return wrapped
-
-
-def admin_required(view):
-    @wraps(view)
-    def wrapped(*args, **kwargs):
-        if "user_id" not in session:
-            flash("Please log in to continue.", "error")
-            return redirect(url_for("login"))
-        if session.get("user_role") != "admin":
-            flash("Admin access is required.", "error")
-            return redirect(url_for("dashboard"))
         return view(*args, **kwargs)
     return wrapped
 
@@ -240,7 +238,7 @@ def login():
         password = request.form.get("password", "")
 
         user = db().execute("""
-            SELECT id, full_name, password_hash, role
+            SELECT id, full_name, password_hash
             FROM users
             WHERE roll_number=?
         """, (roll_number,)).fetchone()
@@ -252,7 +250,6 @@ def login():
         session.clear()
         session["user_id"] = user["id"]
         session["user_name"] = user["full_name"]
-        session["user_role"] = user["role"] or "student"
         session["csrf_token"] = secrets.token_urlsafe(32)
         flash(f"Welcome, {user['full_name']}!", "success")
         return redirect(url_for("dashboard"))
@@ -285,12 +282,28 @@ def dashboard():
     )
 
 
+@app.route("/resources/<int:resource_id>/download")
+@login_required
+def download_resource(resource_id):
+    resource = db().execute(
+        "SELECT filename FROM resources WHERE id=?", (resource_id,)
+    ).fetchone()
+    if resource is None:
+        abort(404)
+
+    return send_from_directory(
+        app.config["UPLOAD_FOLDER"],
+        resource["filename"],
+        as_attachment=request.args.get("download") == "1",
+    )
+
+
 @app.route("/profile")
 @login_required
 def profile():
     connection = db()
     user = connection.execute("""
-        SELECT full_name, email, roll_number, branch, semester, role, created_at
+        SELECT full_name, email, roll_number, branch, semester, created_at
         FROM users WHERE id=?
     """, (session["user_id"],)).fetchone()
 
@@ -413,91 +426,6 @@ def delete_resource(id):
 
     flash("Resource deleted successfully.", "success")
     return redirect(url_for("profile"))
-
-
-@app.route("/admin")
-@admin_required
-def admin_panel():
-    connection = db()
-    users = connection.execute("""
-        SELECT id, full_name, email, roll_number, branch, semester, role, created_at
-        FROM users ORDER BY id DESC
-    """).fetchall()
-    resources = connection.execute("""
-        SELECT resources.*, users.full_name AS uploader_name
-        FROM resources LEFT JOIN users ON users.id=resources.uploaded_by
-        ORDER BY resources.id DESC
-    """).fetchall()
-    totals = connection.execute("""
-        SELECT
-            (SELECT COUNT(*) FROM users) AS total_users,
-            (SELECT COUNT(*) FROM resources) AS total_resources,
-            (SELECT COUNT(*) FROM users WHERE role='admin') AS total_admins
-    """).fetchone()
-    return render_template("admin.html", users=users, resources=resources, totals=totals)
-
-
-@app.route("/admin/resource/<int:id>/delete", methods=["POST"])
-@admin_required
-def admin_delete_resource(id):
-    resource = db().execute("SELECT filename FROM resources WHERE id=?", (id,)).fetchone()
-    if resource:
-        db().execute("DELETE FROM resources WHERE id=?", (id,))
-        db().commit()
-        path = UPLOAD_FOLDER / resource["filename"]
-        if path.exists():
-            path.unlink()
-        flash("Resource deleted successfully.", "success")
-    else:
-        flash("Resource not found.", "error")
-    return redirect(url_for("admin_panel"))
-
-
-@app.route("/admin/user/<int:id>/role", methods=["POST"])
-@admin_required
-def admin_update_role(id):
-    role = request.form.get("role")
-    if role not in {"admin", "student"}:
-        flash("Invalid role selected.", "error")
-    elif id == session["user_id"] and role != "admin":
-        flash("You cannot remove your own admin access.", "error")
-    else:
-        result = db().execute("UPDATE users SET role=? WHERE id=?", (role, id))
-        db().commit()
-        if result.rowcount:
-            flash("User role updated successfully.", "success")
-        else:
-            flash("User not found.", "error")
-    return redirect(url_for("admin_panel"))
-
-
-@app.route("/admin/user/<int:id>/delete", methods=["POST"])
-@admin_required
-def admin_delete_user(id):
-    if id == session["user_id"]:
-        flash("You cannot delete your own admin account.", "error")
-        return redirect(url_for("admin_panel"))
-
-    connection = db()
-    user = connection.execute("SELECT id, full_name FROM users WHERE id=?", (id,)).fetchone()
-    if user is None:
-        flash("User not found.", "error")
-        return redirect(url_for("admin_panel"))
-
-    resources = connection.execute(
-        "SELECT filename FROM resources WHERE uploaded_by=?", (id,)
-    ).fetchall()
-    connection.execute("DELETE FROM resources WHERE uploaded_by=?", (id,))
-    connection.execute("DELETE FROM users WHERE id=?", (id,))
-    connection.commit()
-
-    for resource in resources:
-        path = UPLOAD_FOLDER / resource["filename"]
-        if path.exists():
-            path.unlink()
-
-    flash(f"User {user['full_name']} and their uploaded resources were deleted.", "success")
-    return redirect(url_for("admin_panel"))
 
 
 @app.route("/logout")

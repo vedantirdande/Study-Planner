@@ -5,3 +5,4 @@ venv/
 .env
 database.db-shm
 database.db-wal
+uploads/

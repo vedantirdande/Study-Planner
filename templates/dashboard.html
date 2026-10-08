@@ -22,9 +22,6 @@
   <a class="action-card" href="{{ url_for('pyq') }}"><span aria-hidden="true">⌁</span><h2>Previous papers</h2><p>Find question papers and practice for exams.</p><strong class="action-link">View papers <span aria-hidden="true">→</span></strong></a>
   <a class="action-card" href="{{ url_for('upload') }}"><span aria-hidden="true">↥</span><h2>Upload resource</h2><p>Share a PDF with your classmates.</p><strong class="action-link">Add a resource <span aria-hidden="true">→</span></strong></a>
   <a class="action-card" href="{{ url_for('profile') }}"><span aria-hidden="true">○</span><h2>My profile</h2><p>View your account and uploaded resources.</p><strong class="action-link">Open profile <span aria-hidden="true">→</span></strong></a>
-  {% if session.get('user_role') == 'admin' %}
-  <a class="action-card admin-action" href="{{ url_for('admin_panel') }}"><span aria-hidden="true">⌘</span><h2>Admin control center</h2><p>Manage user access and moderate portal resources.</p><strong class="action-link">Manage portal <span aria-hidden="true">→</span></strong></a>
-  {% endif %}
   </div>
 </section>
 <section class="dashboard-section recent-section">
@@ -35,7 +32,7 @@
   <p class="library-empty" data-resource-empty hidden>No recent resources match that search.</p>
   <div class="recent-grid" data-resource-list>
     {% for item in recent_resources %}
-    <article class="recent-card" data-resource-card><div class="recent-icon">{{ '📚' if item.resource_type == 'Notes' else '📄' }}</div><div class="recent-content"><span class="tag">{{ item.resource_type }}</span><h3>{{ item.title }}</h3><p>{{ item.subject }}</p><div class="recent-meta"><span>{{ item.branch }}</span><span>Semester {{ item.semester }}</span></div></div><a class="btn small ghost" target="_blank" rel="noopener" href="{{ url_for('static', filename='uploads/' + item.filename) }}">View PDF</a></article>
+    <article class="recent-card" data-resource-card><div class="recent-icon">{{ '📚' if item.resource_type == 'Notes' else '📄' }}</div><div class="recent-content"><span class="tag">{{ item.resource_type }}</span><h3>{{ item.title }}</h3><p>{{ item.subject }}</p><div class="recent-meta"><span>{{ item.branch }}</span><span>Semester {{ item.semester }}</span></div></div><a class="btn small ghost" target="_blank" rel="noopener" href="{{ url_for('download_resource', resource_id=item.id) }}">View PDF</a></article>
     {% else %}
     <div class="dashboard-empty"><strong>The library is ready for its first contribution.</strong><span>Upload a PDF and help your classmates get started.</span><a class="btn primary small" href="{{ url_for('upload') }}">Upload the first resource</a></div>
     {% endfor %}

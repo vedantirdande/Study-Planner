@@ -2,7 +2,7 @@
 
 @media (max-width: 992px) {
   .section, .page-head, .filter-panel, .resource-grid, .profile-layout,
-  .form-page, .admin-section, .stats-grid, .card-grid, .dashboard-section {
+  .form-page, .stats-grid, .card-grid, .dashboard-section {
     width: min(100% - 40px, 920px);
   }
 
@@ -41,7 +41,7 @@
   .hero-actions .btn { flex: 1 1 180px; }
 
   .section, .page-head, .filter-panel, .resource-grid, .profile-layout,
-  .form-page, .admin-section, .stats-grid, .card-grid, .dashboard-section {
+  .form-page, .stats-grid, .card-grid, .dashboard-section {
     width: min(100% - 32px, 560px);
   }
   .page-head { margin-top: 38px; }
@@ -62,8 +62,6 @@
   .profile-table, .table-wrap { overflow-x: auto; }
   .profile-table { display: block; }
   .profile-table td:first-child { width: auto; }
-  .admin-header { align-items: stretch; flex-direction: column; }
-  .admin-stats { grid-template-columns: 1fr; }
   .inline-form { align-items: stretch; flex-direction: column; }
   .site-footer { align-items: flex-start; flex-direction: column; gap: 8px; }
 }

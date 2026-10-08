@@ -1,6 +1,6 @@
-# Study Portal
+# GHRCEM Study Portal
 
-A Flask + SQLite student resource portal for notes, previous-year question papers and shared academic PDFs.
+A Flask + SQLite GHRCEM student resource portal for semester-wise notes, previous-year question papers and shared academic PDFs.
 
 ## Features
 
@@ -8,10 +8,10 @@ A Flask + SQLite student resource portal for notes, previous-year question paper
 - Secure password hashing
 - Search and filter notes/PYQs by branch and semester
 - PDF uploads with a 10 MB limit
+- Login-protected viewing and downloading of uploaded PDFs, stored outside the public static directory
 - Unique server-generated upload filenames
 - Student profile and resource management
 - Edit/delete only your own resources
-- Admin panel for user roles and resource moderation
 - CSRF protection for all POST actions
 - Responsive mobile-friendly UI
 
@@ -35,22 +35,6 @@ If PowerShell blocks activation, you can run the environment's Python directly:
 .\.venv\Scripts\python.exe app.py
 ```
 
-## Create an admin account
-
-There is no public admin sign-up form. Register an account from the portal first, then promote that account from PowerShell using its exact registration number:
-
-```powershell
-python database\create_admin.py YOUR_ACTUAL_REGISTRATION_NUMBER
-```
-
-For example:
-
-```powershell
-python database\create_admin.py 2526CTFBTITE016
-```
-
-The command prints an error if the account does not exist. After a successful promotion, log out and log in again. The **Admin** link will appear in the navigation and on the dashboard.
-
 ## Important before deployment
 
 Set a strong secret key in the environment:
@@ -66,3 +50,4 @@ For production, use a production WSGI server such as Gunicorn on Linux/hosting r
 ## Upload policy
 
 Only PDF files are accepted and the maximum upload size is 10 MB.
+Existing files in `static\uploads` are moved to the private `uploads` directory when the app starts.

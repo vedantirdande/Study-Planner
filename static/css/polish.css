@@ -46,8 +46,6 @@ h1, h2, h3 { color: var(--navy); }
 .nav-links a:hover { background: rgba(255,255,255,.1); color: #fff; }
 .nav-links a.active { background: rgba(255,255,255,.14); color: #fff; }
 .nav-links .nav-cta { background: var(--coral) !important; padding-inline: 16px; }
-.nav-links .nav-admin { color: #f6d77a; border: 1px solid rgba(246,215,122,.35); }
-.nav-admin span { color: #fff; margin-right: 4px; }
 
 .hero {
   min-height: 560px; text-align: left; place-items: center start; padding: 110px clamp(20px, 9vw, 150px);
@@ -71,7 +69,7 @@ h1, h2, h3 { color: var(--navy); }
 .btn.ghost { border: 1px solid var(--line); background: #fff; }
 .btn.danger { background: #bd4539; }
 
-.section, .page-head, .filter-panel, .resource-grid, .profile-layout, .form-page, .admin-section, .stats-grid, .card-grid { max-width: 1180px; }
+.section, .page-head, .filter-panel, .resource-grid, .profile-layout, .form-page, .stats-grid, .card-grid { max-width: 1180px; }
 .stats-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); margin-inline: auto; }
 .section { margin-top: 76px; margin-bottom: 76px; }
 .page-head { margin-top: 58px; margin-bottom: 32px; }
@@ -137,10 +135,6 @@ h1, h2, h3 { color: var(--navy); }
 .action-link { display: block; margin-top: 18px; color: var(--blue); font-size: 13px; }
 .action-link span { margin-left: 3px; transition: margin-left .2s ease; }
 .action-card:hover .action-link span { margin-left: 7px; }
-.action-card.admin-action { background: var(--navy); border-color: var(--navy); }
-.action-card.admin-action h2, .action-card.admin-action p { color: white; }
-.action-card.admin-action > span { background: var(--yellow); }
-.action-card.admin-action .action-link { color: var(--yellow); }
 
 .filter-panel { background: var(--surface); padding: 17px; margin-bottom: 28px; }
 .search-form { gap: 10px; }
@@ -171,14 +165,6 @@ input:focus, select:focus { outline: 3px solid rgba(31,111,235,.15); border-colo
 .site-footer strong { color: white; }
 .flash { border: 1px solid rgba(0,0,0,.06); }
 
-.admin-section { margin: 32px auto; }
-.admin-section .table-wrap { background: var(--surface); }
-.admin-section th { background: #edf5f1; color: var(--navy); }
-.admin-section td { border-color: var(--line); }
-.admin-section .section-heading h2 { font-size: 24px; }
-.admin-section .tag { background: #e8f4ef; color: #27785d; }
-.admin-section .btn.small { min-height: 36px; }
-.admin-row-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 7px; }
 .table-wrap { scrollbar-color: #9fc8bc transparent; }
 
 @media (max-width: 700px) {
