@@ -1,6 +1,6 @@
-# GHRCEM Study Portal
+# STUDY PORTAL
 
-A Flask + SQLite GHRCEM student resource portal for semester-wise notes, previous-year question papers and shared academic PDFs.
+A Flask + SQLite student resource portal for semester-wise notes, previous-year question papers and shared academic PDFs.
 
 ## Features
 
@@ -18,7 +18,7 @@ A Flask + SQLite GHRCEM student resource portal for semester-wise notes, previou
 ## Run locally (Windows PowerShell)
 
 ```powershell
-cd "C:\Users\ASUS\Documents\GHRCEM_Study_Portal_Perfected"
+cd "C:\Users\ASUS\Documents\Study_Portal_Perfected"
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
 pip install -r requirements.txt
